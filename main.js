@@ -9,7 +9,7 @@ let operator = '';
 
 nums.forEach((nBtn) => {
     nBtn.addEventListener('click', () => {
-        display.textContent = nBtn.textContent;
+        display.textContent += nBtn.textContent;
     });
 });
 
@@ -28,22 +28,26 @@ operators.forEach((btn) => {
 });
 
 equalsBtn.addEventListener('click', () => {
+    const secondNumber = display.textContent;
     let result;
     switch (operator) {
         case '+':
-            result = Number(firstNumber) + Number(display.textContent);
+            result = Number(firstNumber) + Number(secondNumber);
             break;
         case '-':
-            result = Number(firstNumber) - Number(display.textContent);
+            result = Number(firstNumber) - Number(secondNumber);
             break;
         case '/':
-            result = Number(firstNumber) / Number(display.textContent);
+            result = Number(firstNumber) / Number(secondNumber);
+            if (secondNumber === '0') {
+                result = 'На ноль делить нельзя';
+            };
             break;
         case '*':
-            result = Number(firstNumber) * Number(display.textContent);
+            result = Number(firstNumber) * Number(secondNumber);
             break;
         default:
-            result = 'Значения не опозднано';
+            result = 'Значения не распознано';
             break;
         
     
