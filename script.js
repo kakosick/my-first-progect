@@ -1,18 +1,52 @@
-const h1 = document.querySelector('#hh1');
-h1.textContent = "Изучения DOM в JavaScript";
+const display = document.querySelector('.display');
+const nums = document.querySelectorAll('.num');
+const clearBtn = document.querySelector('.clear');
+const operators = document.querySelectorAll('.op');
+const equalsBtn = document.querySelector('.equals');
 
-const btn = document.querySelector('#btn');
-const body = document.querySelector('body');
-const resetbtn = document.querySelector('#resetBtn');
+let firstNumber = '';
+let operator = '';
 
-btn.addEventListener('click', () => {
-    body.style.backgroundColor = 'black';
-    h1.style.color = 'white';
-    h1.textContent = 'Блягодоря кнопке ты поменял цвет и текст';
+nums.forEach((nBtn) => {
+    nBtn.addEventListener('click', () => {
+        display.textContent = nBtn.textContent;
+    });
 });
 
-resetbtn.addEventListener('click', () => {
-    body.style.backgroundColor = 'white';
-    h1.style.color = 'black';
-    h1.textContent = 'Текст и его стили вернулись в исходное состояние!';
-})
+clearBtn.addEventListener('click', () => {
+    display.textContent = '';
+    firstNumber = '';
+    operator = '';
+});
+
+operators.forEach((btn) => {
+    btn.addEventListener('click', () => {
+        firstNumber = display.textContent;
+        operator = btn.textContent;
+        display.textContent = '';
+    })
+});
+
+equalsBtn.addEventListener('click', () => {
+    let result;
+    switch (operator) {
+        case '+':
+            result = Number(firstNumber) + Number(display.textContent);
+            break;
+        case '-':
+            result = Number(firstNumber) - Number(display.textContent);
+            break;
+        case '/':
+            result = Number(firstNumber) / Number(display.textContent);
+            break;
+        case '*':
+            result = Number(firstNumber) * Number(display.textContent);
+            break;
+        default:
+            result = 'Значения не опозднано';
+            break;
+        
+    
+    }
+    display.textContent = result;
+});
